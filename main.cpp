@@ -24,8 +24,6 @@ int main(int argc, char *argv[]) {
     end = GetTimeMs64();
 
     cout << end - start;
-
-
     return 0;
 }
 
