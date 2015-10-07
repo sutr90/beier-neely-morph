@@ -7,6 +7,8 @@
 
 #include <utility>
 #include <dlib/geometry/vector.h>
+#include <dlib/array2d/array2d_kernel.h>
+#include <dlib/pixel.h>
 
 typedef std::pair<dlib::point, dlib::point> line;
 
@@ -15,7 +17,7 @@ private:
     dlib::point Pp, Qp, P, Q;
 public:
     MorphSingleLine(line from, line to);
-    void morph_image_dlib();
+    void morph_image_dlib(dlib::array2d<dlib::rgb_pixel>& img_in, dlib::array2d<dlib::rgb_pixel>& img_out);
 
     dlib::point perp(const dlib::point &pt);
 
