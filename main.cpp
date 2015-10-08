@@ -17,9 +17,9 @@ int main(int argc, char *argv[]) {
     uint64 start = GetTimeMs64();
 
     point Pp(0, 0);
-    point Qp(0, 4);
+    point Qp(4, 0);
     point P(0, 0);
-    point Q(0, 8);
+    point Q(7, 0);
     line from = std::make_pair(Pp, Qp);
     line to = std::make_pair(P, Q);
 
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     msl.morph_image_dlib(img, result);
     save_png(result, "../../result_single.png");
     uint64 end = GetTimeMs64();
-    cout << end - start << endl;
+    cout << "time " << end - start << endl;
 
 
     start = GetTimeMs64();
@@ -35,10 +35,10 @@ int main(int argc, char *argv[]) {
                                     line(point(84, 46), point(190, 46))};
 
     std::vector<line> lines_to = {line(point(79, 216), point(79, 52)),
-                                  line(point(84, 46), point(186, 17))};
+                                  line(point(84, 46), point(160, 5))};
 
-    MorphMultipleLines mml = MorphMultipleLines(lines_from, lines_from);
-    mml.morph_image_dlib(img, result, 300, 1, 0);
+    MorphMultipleLines mml = MorphMultipleLines(lines_from, lines_to);
+    mml.morph_image_dlib(img, result, 200, 1, 0);
 
     end = GetTimeMs64();
     cout << end - start << endl;
