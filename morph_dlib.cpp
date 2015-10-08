@@ -15,7 +15,7 @@ point MorphSingleLine::perp(const point &pt) {
 double MorphSingleLine::u_func(point &X, point &Q, point &P) {
     point a = X - P;
     point b = Q - P;
-    double m = b.length();
+    double m = b.length_squared();
     return a.dot(b) / m;
 }
 
@@ -38,8 +38,8 @@ void MorphSingleLine::morph_image_dlib(dlib::array2d<dlib::rgb_pixel> &img_in,
     dlib::rgb_pixel grey(127, 127, 127);
     assign_all_pixels(img_out, grey);
 
-    for (int y = 0; y < 256; y++) {
-        for (int x = 0; x < 256; x++) {
+    for (int y = 0; y < img_in.nr(); y++) {
+        for (int x = 0; x < img_in.nc(); x++) {
             point X(x, y);
             u = u_func(X, Q, P);
             v = v_func(X, Q, P);
@@ -68,8 +68,8 @@ void MorphMultipleLines::morph_image_dlib(dlib::array2d<dlib::rgb_pixel> &img_in
     dlib::rgb_pixel grey(127, 127, 127);
     assign_all_pixels(img_out, grey);
 
-    for (int y = 0; y < 256; y++) {
-        for (int x = 0; x < 256; x++) {
+    for (int y = 0; y < img_in.nr(); y++) {
+        for (int x = 0; x < img_in.nc(); x++) {
             point X(x, y);
             dpoint DSUM(0.0, 0.0);
             weightsum = 0;
