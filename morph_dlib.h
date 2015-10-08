@@ -34,6 +34,7 @@ class MorphMultipleLines {
 private:
     std::vector<line> &from;
     std::vector<line> &to;
+    double dist_segment(dlib::point X, line l, double u, double v);
 
 public:
     MorphMultipleLines(std::vector<line> &from, std::vector<line> &to);
@@ -41,7 +42,6 @@ public:
     void morph_image_dlib(dlib::array2d<dlib::rgb_pixel> &img_in, dlib::array2d<dlib::rgb_pixel> &img_out, double a,
                           double b, double p);
 
-    double dist_segment(dlib::point X, line l, double u, double v);
 
 };
 

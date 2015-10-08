@@ -25,15 +25,25 @@ int main(int argc, char *argv[]) {
 
     MorphSingleLine msl = MorphSingleLine(from, to);
     msl.morph_image_dlib(img, result);
-
+    save_png(result, "../../result_single.png");
     uint64 end = GetTimeMs64();
+    cout << end - start << endl;
 
 
-    std::vector<point> from =
+    start = GetTimeMs64();
+    std::vector<line> lines_from = {line(point(79, 216), point(79, 52)),
+                                    line(point(84, 46), point(190, 46))};
 
-    cout << end - start;
+    std::vector<line> lines_to = {line(point(79, 216), point(79, 52)),
+                                  line(point(84, 46), point(186, 17))};
 
-    save_png(result, "../../result.png");
+    MorphMultipleLines mml = MorphMultipleLines(lines_from, lines_from);
+    mml.morph_image_dlib(img, result, 300, 1, 0);
+
+    end = GetTimeMs64();
+    cout << end - start << endl;
+
+    save_png(result, "../../result_multi.png");
     return 0;
 }
 
