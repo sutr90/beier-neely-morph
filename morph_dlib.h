@@ -17,15 +17,33 @@ private:
     dlib::point Pp, Qp, P, Q;
 public:
     MorphSingleLine(line from, line to);
-    void morph_image_dlib(dlib::array2d<dlib::rgb_pixel>& img_in, dlib::array2d<dlib::rgb_pixel>& img_out);
 
-    dlib::point perp(const dlib::point &pt);
+    void morph_image_dlib(dlib::array2d<dlib::rgb_pixel> &img_in, dlib::array2d<dlib::rgb_pixel> &img_out);
 
-    double u_func(dlib::point &X, dlib::point &Q, dlib::point &P);
+    static dlib::point perp(const dlib::point &pt);
 
-    double v_func(dlib::point &X, dlib::point &Q, dlib::point &P);
+    static double u_func(dlib::point &X, dlib::point &Q, dlib::point &P);
 
-    dlib::point x_prime(double u, double v, dlib::point &Pp, dlib::point &Qp);
+    static double v_func(dlib::point &X, dlib::point &Q, dlib::point &P);
+
+    static dlib::point x_prime(double u, double v, dlib::point &Pp, dlib::point &Qp);
 };
+
+
+class MorphMultipleLines {
+private:
+    std::vector<line> &from;
+    std::vector<line> &to;
+
+public:
+    MorphMultipleLines(std::vector<line> &from, std::vector<line> &to);
+
+    void morph_image_dlib(dlib::array2d<dlib::rgb_pixel> &img_in, dlib::array2d<dlib::rgb_pixel> &img_out, double a,
+                          double b, double p);
+
+    double dist_segment(dlib::point X, line l, double u, double v);
+
+};
+
 
 #endif //MORPH_MORPH_DLIB_H

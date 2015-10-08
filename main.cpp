@@ -28,6 +28,9 @@ int main(int argc, char *argv[]) {
 
     uint64 end = GetTimeMs64();
 
+
+    std::vector<point> from =
+
     cout << end - start;
 
     save_png(result, "../../result.png");
