@@ -10,18 +10,14 @@ using namespace dlib;
 int main(int argc, char *argv[]) {
 
     array2d<rgb_pixel> img;
-    load_image(img, "../../file.png");
+    load_image(img, "../../template.jpg");
 
     array2d<rgb_pixel> result(img.nr(), img.nc());
 
     uint64 start = GetTimeMs64();
 
-    point Pp(0, 0);
-    point Qp(4, 0);
-    point P(0, 0);
-    point Q(7, 0);
-    line from = std::make_pair(Pp, Qp);
-    line to = std::make_pair(P, Q);
+    line from(point(86, 136), point(153, 136));
+    line to(point(361, 121), point(401, 107));
 
     MorphSingleLine msl = MorphSingleLine(from, to);
     msl.morph_image_dlib(img, result);
@@ -31,13 +27,17 @@ int main(int argc, char *argv[]) {
 
 
     start = GetTimeMs64();
-    std::vector<line> lines_from = {line(point(79, 216), point(79, 52)),
-                                    line(point(84, 46), point(190, 46))};
+    std::vector<line> lines_from = {line(point(86, 137), point(153, 136)),
+                                    line(point(93, 212), point(148, 210)),
+                                    line(point(86, 137), point(93, 212)),
+                                    line(point(153, 136), point(148, 210))};
 
-    std::vector<line> lines_to = {line(point(79, 216), point(79, 52)),
-                                  line(point(84, 46), point(160, 5))};
+    std::vector<line> lines_to = {line(point(361, 121), point(401, 107)),
+                                  line(point(369, 162), point(414, 147)),
+                                  line(point(361, 121), point(369, 162)),
+                                  line(point(401, 107), point(414, 147))};
 
-    MorphMultipleLines mml = MorphMultipleLines(lines_from, lines_to);
+    MorphMultipleLines mml = MorphMultipleLines(lines_to, lines_from);
     mml.morph_image_dlib(img, result, 200, 1, 0);
 
     end = GetTimeMs64();
